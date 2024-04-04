@@ -16,7 +16,7 @@ VALIDATE(){
     then
         echo -e "$2 .. $R FAILED $N"
     else
-        echo -e "$2... $G SUCCESS $N"
+        echo -e "$2 .. $G SUCCESS $N"
     fi
 }
 
@@ -34,7 +34,7 @@ VALIDATE $? "Copied mongodb repo"
 
 dnf install mongodb-org -y &>> $LOGGFILE
 
-VALIDATE $? "installation og mongodb"
+VALIDATE $? "installation of mongodb"
 
 systemctl enable mongod &>> $LOGGFILE
 
