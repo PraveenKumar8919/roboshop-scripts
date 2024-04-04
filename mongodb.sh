@@ -25,10 +25,29 @@ then
     echo -e " $R Please try with root user access:: $N"
     exit 1
 else
-    echo -e " You are a root user ::"
+    echo -e "You are a root user ::"
 fi
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> LOGGFILE
 
 VALIDATE $? "Copied mongodb repo"
 
+dnf install mongodb-org -y &>> $LOGGFILE
+
+VALIDATE $? "installation og mongodb"
+
+systemctl enable mongod &>> $LOGGFILE
+
+VALIDATE $? "Enabling mongodb"
+
+systemctl start mongod &>> $LOGGFILE
+
+VALIDATE $? "Starting mongodb"
+
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGGFILE
+
+VALIDATE $? "Remote IP updating"
+
+systemctl restart mongod &>> $LOGGFILE
+
+VALIDATE $? "Restarting mongodb"
