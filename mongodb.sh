@@ -16,7 +16,7 @@ VALIDATE(){
     then
         echo -e "$2 .. $R FAILED $N"
     else
-        echo -e "$2... $R SUCCESS $N"
+        echo -e "$2... $G SUCCESS $N"
     fi
 }
 
@@ -25,7 +25,7 @@ then
     echo -e " $R Please try with root user access:: $N"
     exit 1
 else
-    echo -e "$G You are a root user :: $N"
+    echo -e " You are a root user ::"
 fi
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> LOGGFILE
