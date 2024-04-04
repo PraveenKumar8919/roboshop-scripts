@@ -45,7 +45,7 @@ then
     useradd roboshop
     $VALIDATE $? "roboshop user creation"
 else
-    echo "User roboshop already exits $Y Skipping $N"
+    echo "User roboshop already exits ..... $G Skipping $N"
 fi
 
 mkdir -p /app
