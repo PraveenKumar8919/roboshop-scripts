@@ -43,7 +43,7 @@ useradd roboshop &>> $LOGGFILE
 
 mkdir /app
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> &LOGGFILE
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGGFILE
 VALIDATE $? "Downloading catalogue"
 
 cd /app
