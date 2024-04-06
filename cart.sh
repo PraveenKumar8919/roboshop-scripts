@@ -26,16 +26,16 @@ then
     echo -e "$R Please run the script as a root user $N"
     exit 1
 else
-    echo "$G You are a root user $N"
+    echo -e "$G You are a root user $N"
 fi
 
-dnf module disable nodejs -y &>> $LOGFILE
+dnf module disable nodejs -y &>> $LOGGFILE
 VALIDATE $? "Disabling current NodeJS"
 
-dnf module enable nodejs:18 -y  &>> $LOGFILE
+dnf module enable nodejs:18 -y  &>> $LOGGFILE
 VALIDATE $? "Enabling NodeJS:18"
 
-dnf install nodejs -y  &>> $LOGFILE
+dnf install nodejs -y  &>> $LOGGFILE
 VALIDATE $? "Installing NodeJS:18"
 
 id roboshop
@@ -50,26 +50,26 @@ fi
 mkdir -p /app
 VALIDATE $? "creating app directory"
 
-curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip  &>> $LOGFILE
+curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip  &>> $LOGGFILE
 VALIDATE $? "Downloading cart application"
 
 cd /app 
 
-unzip -o /tmp/cart.zip  &>> $LOGFILE
+unzip -o /tmp/cart.zip  &>> $LOGGFILE
 VALIDATE $? "unzipping cart"
 
-npm install  &>> $LOGFILE
+npm install  &>> $LOGGFILE
 VALIDATE $? "Installing dependencies"
 
 # use absolute, because cart.service exists there
-cp /home/centos/roboshop-scripts/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
+cp /home/centos/roboshop-scripts/cart.service /etc/systemd/system/cart.service &>> $LOGGFILE
 VALIDATE $? "Copying cart service file"
 
-systemctl daemon-reload &>> $LOGFILE
+systemctl daemon-reload &>> $LOGGFILE
 VALIDATE $? "cart daemon reload"
 
-systemctl enable cart &>> $LOGFILE
+systemctl enable cart &>> $LOGGFILE
 VALIDATE $? "Enable cart"
 
-systemctl start cart &>> $LOGFILE
+systemctl start cart &>> $LOGGFILE
 VALIDATE $? "Starting cart"
