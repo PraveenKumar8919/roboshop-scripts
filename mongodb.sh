@@ -29,7 +29,7 @@ else
     echo -e "You are a root user ::"
 fi
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> LOGGFILE
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGGFILE
 VALIDATE $? "Copied mongodb repo"
 
 dnf install mongodb-org -y &>> $LOGGFILE
