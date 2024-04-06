@@ -32,6 +32,12 @@ fi
 dnf module disable nodejs -y &>> $LOGFILE
 VALIDATE $? "Disabling current NodeJS"
 
+dnf module enable nodejs:18 -y  &>> $LOGFILE
+VALIDATE $? "Enabling NodeJS:18"
+
+dnf install nodejs -y  &>> $LOGFILE
+VALIDATE $? "Installing NodeJS:18"
+
 id roboshop
 if [ $? -ne 0 ]
 then
@@ -42,36 +48,28 @@ else
 fi
 
 mkdir -p /app
-
 VALIDATE $? "creating app directory"
 
 curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip  &>> $LOGFILE
-
 VALIDATE $? "Downloading cart application"
 
 cd /app 
 
 unzip -o /tmp/cart.zip  &>> $LOGFILE
-
 VALIDATE $? "unzipping cart"
 
 npm install  &>> $LOGFILE
-
 VALIDATE $? "Installing dependencies"
 
 # use absolute, because cart.service exists there
 cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
-
 VALIDATE $? "Copying cart service file"
 
 systemctl daemon-reload &>> $LOGFILE
-
 VALIDATE $? "cart daemon reload"
 
 systemctl enable cart &>> $LOGFILE
-
 VALIDATE $? "Enable cart"
 
 systemctl start cart &>> $LOGFILE
-
 VALIDATE $? "Starting cart"

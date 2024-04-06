@@ -42,29 +42,23 @@ else
 fi
 
 mkdir -p /app &>> $LOGFILE
-
 VALIDATE $? "creating app directory"
 
 curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip &>> $LOGFILE
-
 VALIDATE $? "Downloading payment"
 
 cd /app 
 
 unzip -o /tmp/payment.zip &>> $LOGFILE
-
 VALIDATE $? "unzipping payment"
 
 pip3.6 install -r requirements.txt &>> $LOGFILE
-
 VALIDATE $? "Installing Dependencies"
 
 cp /home/centos/roboshop-shell/payment.service /etc/systemd/system/payment.service &>> $LOGFILE
-
 VALIDATE $? "Copying payment service"
 
 systemctl daemon-reload &>> $LOGFILE
-
 VALIDATE $? "daemon reaload"
 
 systemctl enable payment  &>> $LOGFILE
