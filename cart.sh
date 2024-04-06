@@ -21,7 +21,7 @@ VALIDATE()
     fi
 }
 
-if [$ID -ne 0 ]
+if [ $ID -ne 0 ]
 then
     echo -e "$R Please run the script as a root user $N"
     exit 1
