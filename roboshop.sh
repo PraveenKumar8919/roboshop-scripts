@@ -26,7 +26,7 @@ do
     {
         "Comment": "Creating a record set for cognito endpoint"
         ,"Changes": [{
-        "Action"              : "CREATE"
+        "Action"              : "UPSERT" 
         ,"ResourceRecordSet"  : {
             "Name"              : "'$i'.'$DOMAIN_NAME'"
             ,"Type"             : "A"
@@ -40,7 +40,8 @@ do
         '
 done
 
-done
+#changing CREATE in Action column to UPSERT.. This means if     r53  records exists it will update with new ip, if not exists it will create
+
 
 
 
